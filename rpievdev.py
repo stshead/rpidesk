@@ -6,9 +6,9 @@ class TDEV():
     def __init__(self):
         self.slot=0
         self.max_n=10
-        self.activearray = [0 for i in range(max_n)]
-        self.posx = [0 for i in range(max_n)]
-        self.posy = [0 for i in range(max_n)]
+        self.activearray = [0 for i in range(self.max_n)]
+        self.posx = [0 for i in range(self.max_n)]
+        self.posy = [0 for i in range(self.max_n)]
         self.abort=False
         self.thread = threading.Thread(target=self.tsthread)
         self.thread.start()
@@ -26,12 +26,12 @@ class TDEV():
                 else:
                     self.activearray[self.slot]=0
             elif(event.code==53):
-                self.posx[self.slot]=event.value
+                self.posx[self.slot]=(800-event.value)
             elif(event.code==54):
-                self.posy[self.slot]=event.value
+                self.posy[self.slot]=(480-event.value)
 
             if(self.abort):
                 dev.close()
                 break
-        print("\n[Touch thread] end")
+        print("[Touch thread] end")
 
